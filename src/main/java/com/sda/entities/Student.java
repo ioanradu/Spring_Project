@@ -75,14 +75,6 @@ public class Student {
         this.locker = locker;
     }
 
-    public Locker integerToLocker(int locker_id) {
-        Locker number = new Locker(locker_id);
-        Stack<Locker> myStack = new Stack();
-        myStack.push(number);
-        number = myStack.pop();
-        return number;
-    }
-
     @Override
     public String toString() {
         return "Student{" +

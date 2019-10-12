@@ -1,5 +1,7 @@
 package com.sda.entryPoints;
 
+import com.sda.dto.StudentDTO;
+import com.sda.dto.TeacherDTO;
 import com.sda.entities.Group;
 import com.sda.entities.Locker;
 import com.sda.entities.Student;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Scanner;
 
 @Component
 public class EntryPoints {
@@ -58,14 +61,15 @@ public class EntryPoints {
     }
 
     public void displayStudents() {
-        List<Student> studentsList = getStudentService().getStudentsListFromDao();
-        for (Object student : studentsList) {
+        List<StudentDTO> studentsList = getStudentService().getStudentsListFromDao();
+        for (StudentDTO student : studentsList) {
             System.out.println(student);
         }
     }
 
-    public void addStudent() {
-        Student student = new Student();
+    public void addStudent(StudentDTO studentDTO) {
+        getStudentService().addStudent(studentDTO);
+        /*Student student = new Student();
         student.setNameStudent("Ana Maria");
         student.setAge(23);
         student.setAverage_grade(3);
@@ -73,7 +77,8 @@ public class EntryPoints {
         Locker locker = new Locker();
         locker.setNumber(13);
         student.setLocker(locker);
-        getStudentService().addStudent(student);
+        getStudentService().addStudent(student);*/
+
     }
 
     public void deleteStudentById(Integer id) {
@@ -93,18 +98,19 @@ public class EntryPoints {
     }
 
     public void displayTeachers() {
-        List<Teacher> teacherList = getTeacherService().getTeacherListFromDao();
-        for (Teacher teacher : teacherList) {
-            System.out.println(teacher);
+        List<TeacherDTO> teacherDTOList = getTeacherService().getTeacherListFromDao();
+        for (TeacherDTO teacherDTO : teacherDTOList) {
+            System.out.println(teacherDTO);
         }
     }
 
-    public void addTeacher() {
-        Teacher teacher = new Teacher();
+    public void addTeacher(TeacherDTO teacherDTO) {
+        getTeacherService().addTeacher(teacherDTO);
+        /*Teacher teacher = new Teacher();
         teacher.setName("Mariana Barghisan");
         teacher.setAge(57);
         teacher.setDiscipline("Matematica");
-        getTeacherService().addTeacher(teacher);
+        getTeacherService().addTeacher(teacher);*/
     }
 
     public void deleteTeacherById(Integer id) {

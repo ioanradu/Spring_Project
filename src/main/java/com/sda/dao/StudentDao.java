@@ -74,9 +74,9 @@ public class StudentDao extends GenericDao {
         Transaction transaction = session.beginTransaction();
         List<Student> studentsList = new ArrayList<>();
         try {
-            String sql = "from Student";
+            String hql = "from Student";
 
-            Query query = session.createQuery(sql);
+            Query query = session.createQuery(hql);
             studentsList = query.list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,6 +85,7 @@ public class StudentDao extends GenericDao {
         session.close();
         return studentsList;
     }
+
 
     public List<Student> getStudentsListGraterThanFiveDao() {
         Session session = HibernateUtil.getSessionFactory().openSession();

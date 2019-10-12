@@ -2,6 +2,7 @@ package com.sda.dao;
 
 import com.sda.entities.Locker;
 
+import com.sda.entities.Student;
 import com.sda.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -45,9 +46,12 @@ public class LockerDao extends GenericDao {
     public boolean deleteLockerDao(Integer id) {
         boolean validator = false;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
             Locker locker = session.get(Locker.class, id);
             if (locker != null) {
+                Student student = session.get(Student.class, id);
+                student.setLocker(null);
+                session.beginTransaction();
+                session.update(student);
                 session.delete(locker);
                 session.getTransaction().commit();
                 validator = true;
