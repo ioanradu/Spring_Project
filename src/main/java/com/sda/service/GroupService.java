@@ -1,7 +1,10 @@
 package com.sda.service;
 
 import com.sda.dao.GroupDao;
+import com.sda.dto.GroupDTO;
 import com.sda.entities.Group;
+import com.sda.transfer.GroupMapper;
+import com.sda.validator.GroupValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +22,23 @@ public class GroupService {
     }
 
     @Autowired
+    private GroupMapper groupMapper;
+
+    @Autowired
+    public GroupValidator groupValidator;
+
+    @Autowired
     public void setGroupDao(GroupDao groupDao) {
         this.groupDao = groupDao;
     }
 
-    public void addGroup(Group group) {
+    public void addGroup(GroupDTO groupDTO) {
+        Group group = new Group();
+        if(groupValidator.isGroupNameValid(groupDTO)){
+            group = groupMapper.convertGroupDTOtoGroup(groupDTO);
+        }else {
+            System.out.println("Valorile introduse nu indeplinesc cerintele cerute");
+        }
         getGroupDao().addGroup(group);
     }
 

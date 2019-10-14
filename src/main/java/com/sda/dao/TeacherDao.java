@@ -26,19 +26,18 @@ public class TeacherDao extends GenericDao {
     }
 
     public List<Teacher> getTeacherList() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
+
         List<Teacher> teacherList = new ArrayList<>();
-        try {
+        try( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            session.beginTransaction();
             String sql = "FROM Teacher";
             Query query = session.createQuery(sql, Teacher.class);
             teacherList = query.list();
-
+            session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        transaction.commit();
-        session.close();
+
         return teacherList;
     }
 

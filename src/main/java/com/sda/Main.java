@@ -1,11 +1,13 @@
 package com.sda;
 
+import com.sda.dto.GroupDTO;
 import com.sda.dto.StudentDTO;
 import com.sda.dto.TeacherDTO;
 import com.sda.entryPoints.EntryPoints;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -21,7 +23,7 @@ public class Main {
 
         //entryPoints.deleteTeacherById(7);
         //entryPoints.updateTeacher(5, "Paul Gradinaru", 24, "Istorie");`
-        entryPoints.displayTeachers();
+        //entryPoints.displayTeachers();
 
         //entryPoints.deleteLockerById(3);
         //entryPoints.addLocker();
@@ -35,7 +37,7 @@ public class Main {
 
         //entryPoints.displayStudentsWithGradesGraterThenFive();
 
-       // Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
        /* System.out.println("Introduceti numele: ");
         String nume  = scanner.nextLine();
@@ -72,5 +74,12 @@ public class Main {
 
         entryPoints.addTeacher(teacherDTO);
 */
+        System.out.println("Introduceti numele grupului: ");
+        String groupName = scanner.nextLine();
+
+        GroupDTO groupDTO = new GroupDTO();
+        groupDTO.setName(groupName);
+
+        entryPoints.addGroup(groupDTO);
     }
 }

@@ -1,5 +1,6 @@
 package com.sda.entryPoints;
 
+import com.sda.dto.GroupDTO;
 import com.sda.dto.StudentDTO;
 import com.sda.dto.TeacherDTO;
 import com.sda.entities.Group;
@@ -158,10 +159,8 @@ public class EntryPoints {
         }
     }
 
-    public void addGroup() {
-        Group group = new Group();
-        group.setName("e");
-        getGroupService().addGroup(group);
+    public void addGroup(GroupDTO groupDTO) {
+        getGroupService().addGroup(groupDTO);
     }
 
     public void displayGroups() {

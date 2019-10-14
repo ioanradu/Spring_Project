@@ -3,6 +3,7 @@ package com.sda.service;
 import com.sda.dao.StudentDao;
 import com.sda.dto.StudentDTO;
 import com.sda.entities.Student;
+import com.sda.transfer.GroupMapper;
 import com.sda.transfer.StudentMapper;
 import com.sda.validator.StudentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
+
     @Autowired
     public void setStudentDao(StudentDao studentDao) {
         this.studentDao = studentDao;
@@ -34,14 +36,12 @@ public class StudentService {
 
     public void addStudent(StudentDTO studentDTO) {
         if(studentValidator.isDTOValid(studentDTO)){ // se face validarea datelor introduse de la tastatura
-            Student student  = studentMapper.convertStudentDTOtoStudent(studentDTO);
+            Student student = studentMapper.convertStudentDTOtoStudent(studentDTO);
             getStudentDao().addStudent(student);
         } else {
             System.out.println("Valorile introduse nu indeplinesc cerintele cerute");
         }
-
     }
-
 
     public List<StudentDTO> getStudentsListFromDao() {
         List<Student> studentsList = getStudentDao().getStudentsList();
