@@ -29,7 +29,7 @@ public class GroupDao {
         }
     }
 
-    public List<Group> getLockerList() {
+    public List<Group> getGroupList() {
         List<Group> groupList = new ArrayList<>();
         try (Session session = HibernateUtil.getSessionFactory().openSession();) {
             session.beginTransaction();
@@ -61,18 +61,13 @@ public class GroupDao {
     public boolean editGroup(Integer id, String name) {
         boolean validator = false;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
             Group group = session.get(Group.class, id);
             if (group != null) {
-                String sql = "UPDATE Group SET name=:name WHERE id = :id";
-                Query query = session.createQuery(sql);
-                query.setParameter("name", name);
-                query.setParameter("id", id);
-                Integer querySucces = query.executeUpdate();
+                session.beginTransaction();
+                group.setName(name);
+                session.update(group);
                 session.getTransaction().commit();
-                if (querySucces != 0) {
-                    validator = true;
-                }
+                validator = true;
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -27,79 +27,65 @@ public class StudentDao extends GenericDao {
     }
 
     public boolean editStudent(Integer id, Integer average_grade) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
         boolean validator = false;
-        try {
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             Student student = session.get(Student.class, id);
             if (student != null) {
-                String sql = "UPDATE Student SET average_grade=:average_grade WHERE id = :id";
-                Query query = session.createQuery(sql);
-                query.setParameter("average_grade", average_grade);
-                query.setParameter("id", id);
-                Integer querrySucces = query.executeUpdate();
-
-                if (querrySucces != 0) {
-                    validator = true;
-                }
+               student.setAverage_grade(average_grade);
+               session.beginTransaction();
+               session.update(student);
+               session.getTransaction().commit();
+               validator = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        transaction.commit();
-        session.close();
+
         return validator;
     }
 
     public boolean deleteStudentDao(Integer id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
         boolean validator = false;
-        try {
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             Student student = session.get(Student.class, id);
             if (student != null) {
+                session.beginTransaction();
                 session.delete(student);
+                session.getTransaction().commit();
                 validator = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        transaction.commit();
-        session.close();
         return validator;
     }
 
     public List<Student> getStudentsList() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
         List<Student> studentsList = new ArrayList<>();
-        try {
+        try( Session session = HibernateUtil.getSessionFactory().openSession()) {
             String hql = "from Student";
-
+            session.beginTransaction();
             Query query = session.createQuery(hql);
             studentsList = query.list();
+            session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        transaction.commit();
-        session.close();
         return studentsList;
     }
 
 
     public List<Student> getStudentsListGraterThanFiveDao() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
         List<Student> studentListGraterThanFive = new ArrayList<>();
-        try {
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
             String sql = "from Student where average_grade >= 5";
             Query query = session.createQuery(sql);
             studentListGraterThanFive = query.list();
+            session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        transaction.commit();
-        session.close();
         return studentListGraterThanFive;
     }
 }

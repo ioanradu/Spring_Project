@@ -12,9 +12,9 @@ import java.util.List;
 @Entity
 @Table(name = "groupss")
 public class Group {
+
     @Id
-    @GenericGenerator(name = "gen", strategy = "increment")
-    @GeneratedValue(generator = "gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name")

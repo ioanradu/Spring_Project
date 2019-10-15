@@ -37,6 +37,7 @@ public class LockerDao extends GenericDao {
             String sql = "from Locker";
             Query query = session.createQuery(sql);
             lockerList = query.list();
+            session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }

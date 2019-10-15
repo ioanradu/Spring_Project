@@ -7,7 +7,6 @@ import com.sda.entryPoints.EntryPoints;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -17,8 +16,8 @@ public class Main {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DependencyConfig.class);
         EntryPoints entryPoints = applicationContext.getBean(EntryPoints.class);
 
-        //entryPoints.deleteStudentById(6);
-        //entryPoints.updateStudent(4, 4);
+        //entryPoints.deleteStudentById(5);
+        //entryPoints.updateStudent(2, 4);
         //entryPoints.displayStudents();
 
         //entryPoints.deleteTeacherById(7);
@@ -30,14 +29,14 @@ public class Main {
         //entryPoints.updateLocker(15,15);
         //entryPoints.displayLockers();
 
-        //entryPoints.updateGroup(5, "e");
+        //entryPoints.updateGroup(5, "y");
         //entryPoints.deleteGroupById(1);
         //entryPoints.addGroup();
-        //entryPoints.displayGroups();
+        entryPoints.displayGroups();
 
         //entryPoints.displayStudentsWithGradesGraterThenFive();
 
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
 
        /* System.out.println("Introduceti numele: ");
         String nume  = scanner.nextLine();
@@ -74,12 +73,12 @@ public class Main {
 
         entryPoints.addTeacher(teacherDTO);
 */
-        System.out.println("Introduceti numele grupului: ");
+      /*  System.out.println("Introduceti numele grupului: ");
         String groupName = scanner.nextLine();
 
         GroupDTO groupDTO = new GroupDTO();
         groupDTO.setName(groupName);
 
-        entryPoints.addGroup(groupDTO);
+        entryPoints.addGroup(groupDTO);*/
     }
 }

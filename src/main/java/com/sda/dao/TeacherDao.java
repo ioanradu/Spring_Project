@@ -28,7 +28,7 @@ public class TeacherDao extends GenericDao {
     public List<Teacher> getTeacherList() {
 
         List<Teacher> teacherList = new ArrayList<>();
-        try( Session session = HibernateUtil.getSessionFactory().openSession();) {
+        try( Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             String sql = "FROM Teacher";
             Query query = session.createQuery(sql, Teacher.class);
@@ -43,7 +43,7 @@ public class TeacherDao extends GenericDao {
 
     public boolean deleteTeacherDao(Integer id) {
         boolean validator = false;
-        try (Session session = HibernateUtil.getSessionFactory().openSession();) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             Teacher teacher = session.get(Teacher.class, id);
             if (teacher != null) {

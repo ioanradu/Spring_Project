@@ -43,8 +43,8 @@ public class GroupService {
     }
 
     public List<Group> getGroupFromDao() {
-        List<Group> lockerList = groupDao.getLockerList();
-        return lockerList;
+        List<Group> groupList = groupDao.getGroupList();
+        return groupList;
     }
 
     public boolean deleteGroup(Integer id) {
